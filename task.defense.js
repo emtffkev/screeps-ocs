@@ -82,15 +82,15 @@ mod.memory = invaderId => {
 };
 mod.creep = {
     defender: {
-        fixedBody: [RANGED_ATTACK, MOVE],
+        fixedBody: [ATTACK, MOVE],
         multiBody: {
             [HEAL]: 1,
             [MOVE]: 2,
-            [RANGED_ATTACK]: 2,
+            [ATTACK]: 2,
             [TOUGH]: 1,
         },
         name: "defender", 
-        behaviour: "ranger"
+        behaviour: "melee"
     },
 };
 // spawn defenses against an invader creep
