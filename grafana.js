@@ -52,6 +52,13 @@ mod.run = function () {
 			stats[`room.${roomName}.terminalMineral`] = 0;
 		}
 	}
+
+	_.forEach(Game.creeps, (c = []) => {
+		const roomName = c.homeRoom,
+		      role     = c.creepType;
+		(stats[`room.${roomName}.roles.${role}`]) ? stats[`room.${roomName}.roles.${role}`] = 1 : stats[`room.${roomName}.roles.${role}`]++;
+	});
+
 	Memory.stats = stats;
 };
 
