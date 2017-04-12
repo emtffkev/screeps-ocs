@@ -1,0 +1,3 @@
+[submodule "screeps.behaviour-action-pattern"]
+    path = src
+    url = git@github.com:ScreepsOCS/screeps.behaviour-action-pattern.git
