@@ -180,6 +180,7 @@ let mod        = {
 	DRIVE_BY_REPAIR_RANGE          : 2, // range that creeps should search when trying to repair and move
 	REMOTE_WORKER_MULTIPLIER       : 1, // Number of workers spawned per remote mining room.
 	PLAYER_WHITELIST               : [
+		'CanisMinor',
 		'canisminor1990',
 		'Ruo',
 		'FanHua',
