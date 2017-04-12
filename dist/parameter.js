@@ -86,7 +86,7 @@ let R          = {
 	ROAD_CONSTRUCTION_ABS_MIN      : 3,
 	TIME_ZONE                      : 1,
 	USE_SUMMERTIME                 : !0,
-	SPAWN_DEFENSE_ON_ATTACK        : !0,
+	SPAWN_DEFENSE_ON_ATTACK        : !1,
 	MANAGED_CONTAINER_TRIGGER      : .25,
 	ROUTE_ROOM_COST                : {},
 	TRAVELLING_BORDER_RANGE        : 22,
