@@ -1,18 +1,1 @@
-let mod = {};
-module.exports = mod;
-mod.name = 'mineralMiner';
-mod.determineTarget = creep => {
-    let notDeterminated = source => {
-        let hasThisSource = data => data.determinatedTarget === source.id;
-        let existingBranding = _.find(Memory.population, hasThisSource);
-        return !existingBranding;
-    };
-    source = _.find(creep.room.minerals, notDeterminated);
-    if( source ) {
-        creep.data.determinatedTarget = source.id;
-    }
-    if( SAY_ASSIGNMENT ) creep.say(String.fromCharCode(9935), SAY_PUBLIC);
-};
-mod.run = function(creep) {
-    return Creep.behaviour.miner.run(creep, {determineTarget: mod.determineTarget});
-};
+let e={};module.exports=e,e.name="mineralMiner",e.determineTarget=(e=>{let r=e=>{let r=r=>r.determinatedTarget===e.id,n=_.find(Memory.population,r);return!n};source=_.find(e.room.minerals,r),source&&(e.data.determinatedTarget=source.id),SAY_ASSIGNMENT&&e.say(String.fromCharCode(9935),SAY_PUBLIC)}),e.run=function(r){return Creep.behaviour.miner.run(r,{determineTarget:e.determineTarget})};

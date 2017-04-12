@@ -1,8 +1,20 @@
 {
-  "name": "screeps-ocs",
-  "version": "1.0.0",
-  "main": "dist/main.js",
-  "repository": "git@github.com:canisminor1990/screeps-ocs.git",
-  "author": "canisminor1990 <canisminor1990@gmail.com>",
-  "license": "MIT"
+	"name"        : "screeps-ocs",
+	"version"     : "1.0.0",
+	"main"        : "dist/main.js",
+	"repository"  : "git@github.com:canisminor1990/screeps-ocs.git",
+	"author"      : "canisminor1990 <canisminor1990@gmail.com>",
+	"license"     : "MIT",
+	"scripts"     : {
+		"build": "gulp && git add -A && git commit -m 'update' && git push"
+	},
+	"dependencies": {
+		"ScreepsAutocomplete": "https://github.com/Garethp/ScreepsAutocomplete.git",
+		"gulp"               : "^3.9.1",
+		"gulp-uglify"        : "^2.1.2",
+		"lodash"             : "^4.17.4",
+		"pump"               : "^1.0.2",
+		"uglify-js"          : "^2.8.22",
+		"uglify-js-harmony"  : "^2.7.5"
+	}
 }
