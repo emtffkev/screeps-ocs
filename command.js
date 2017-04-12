@@ -1,2 +1,5 @@
 Game.rooms['W82S67'].setStore('58eca89ba852ca4678cfd6f7', RESOURCE_ENERGY, 2000);
 Game.rooms['W82S67'].setStore('58eca89ba852ca4678cfd6f7', RESOURCE_CATALYZED_GHODIUM_ACID, 3000)
+
+Game.rooms['W81S67'].setStore('58dd9834afcbae71111dc3ed', RESOURCE_ENERGY, 2000);
+Game.rooms['W81S67'].setStore('58dd9834afcbae71111dc3ed', RESOURCE_CATALYZED_GHODIUM_ACID, 3000)
