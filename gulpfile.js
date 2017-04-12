@@ -10,7 +10,7 @@ gulp.task('default', (cb) => {
 	};
 
 	pump([
-		     gulp.src('lib/*.js'),
+		     gulp.src('src/*.js'),
 		     minifier(options, uglifyjs),
 		     gulp.dest('dist')
 	     ],
