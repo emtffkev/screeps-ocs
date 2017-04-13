@@ -161,7 +161,7 @@ let mod        = {
 		STRUCTURE_RAMPART
 	],
 	CONTROLLER_SIGN                : true,
-	CONTROLLER_SIGN_MESSAGE        : `Belong to CanisMinor ${unescape('%uD83D%uDE18')}`,
+	CONTROLLER_SIGN_MESSAGE        : `Belong to CanisMinor ${String.fromCodePoint(0xD83D) + String.fromCodePoint(0xDE18)}`, // 😘
 	CONTROLLER_SIGN_UPDATE         : true, // Update sign message if user changes CONTROLLER_SIGN_MESSAGE
 	MINERS_AUTO_BUILD              : true, // miners and remoteMiners will build their own containers if they are missing.
 	MINER_WORK_THRESHOLD           : 50, // how long to wait before a miner checks for repairs/construction sites nearby again
