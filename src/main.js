@@ -1,4 +1,4 @@
-console.log('# Coding Update');
+/* https://github.com/ScreepsOCS/screeps.behaviour-action-pattern */
 const cpuAtLoad = Game.cpu.getUsed();
 
 // check if a path is valid
@@ -233,6 +233,7 @@ global.install = () => {
     Spawn.extend();
     FlagDir.extend();
     Task.populate();
+    Visuals.extend();
     // custom extend
     if( global.mainInjection.extend ) global.mainInjection.extend();
     OCSMemory.activateSegment(MEM_SEGMENTS.COSTMATRIX_CACHE, true);

@@ -55,8 +55,9 @@ let mod        = {
 		WALL             : false, // highlight weakest wall and display hits
 		RAMPART          : false, // highlight weakest rampart and display hits
 		ROAD             : false, // highlight weakest road and display hits
-		HEATMAP_INTERVAL : 2, // intervals between collections
-		ACTION_ASSIGNMENT: true // draws a line from a creep and it's new assignment
+        HEATMAP: false, // collects creep positioning to display a heatmap. WARNING: HIGH MEMORY USAGE
+        HEATMAP_INTERVAL: 2, // intervals between collections
+        ACTION_ASSIGNMENT: true, // draws a line from a creep and it's new assignment
 	},
 	// function parameters: room. expected result: boolean
 	SEMI_AUTOMATIC_CONSTRUCTION    : true, // enables semi-automatic construction. Will construct based on flags.
