@@ -1,0 +1,7 @@
+/**
+ * A simple diamond pattern iterator which ends after one loop.
+ *
+ * Test case: [...load("util.diamond.iterator").loop({x:19,y:7},3)].map(i=>
+ *               Game.rooms.W29N19.createConstructionSite(i.x,i.y,STRUCTURE_ROAD))
+ */
+class t{static loop(i,s){const e=i,r=s;if(!_.isFinite(s))throw new Error("not finite: "+JSON.stringify([i,s]));return{[Symbol.iterator]:function(){return new t(e,r)}}}static inside(t,i,s){return Math.abs(i.x-t.x)+Math.abs(i.y-t.y)<s}constructor(t,i){if(!_.isFinite(i))throw new Error("not finite: "+JSON.stringify([t,i]));this._radius=i,this.x=t.x,this.y=t.y,this._dir=TOP_RIGHT,this._stepA=i-.25,this._stepB=.25}next(){const t=this._stepA,i=this._stepB,s={done:!1,value:{}};switch(this._dir){case TOP_RIGHT:s.value.x=Math.round(this.x-t),s.value.y=Math.round(this.y+i);break;case BOTTOM_RIGHT:s.value.x=Math.round(this.x-i),s.value.y=Math.round(this.y-t);break;case BOTTOM_LEFT:s.value.x=Math.round(this.x+t),s.value.y=Math.round(this.y-i);break;case TOP_LEFT:s.value.x=Math.round(this.x+t),s.value.y=Math.round(this.y+i);break;default:return{done:!0,value:!1}}return this._stepA=t-.5,this._stepB=i+.5,this._stepA<1&&(this._dir=this._dir+2,this._stepA=this._radius-.25,this._stepB=.25),s}}module.exports=t;
