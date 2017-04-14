@@ -91,12 +91,12 @@ let mod        = {
 	//MAX_SELL_RANGE: 60,
 	TERMINAL_ENERGY                : 50000,
 	MIN_SELL_RATIO                 : {
-		'H': 0.08,
-		'O': 0.08,
-		'U': 0.1,
-		'L': 0.1,
-		'K': 0.1,
-		'Z': 0.1,
+		'H': 0.05,
+		'O': 0.05,
+		'U': 0.15,
+		'L': 0.15,
+		'K': 0.15,
+		'Z': 0.15,
 		'X': 0.3
 	},
 	MAX_REPAIR_LIMIT               : { // Limits how high structures get repaired by towers, regarding RCL
