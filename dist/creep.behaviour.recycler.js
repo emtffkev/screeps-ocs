@@ -1,1 +1,0 @@
-let t={};module.exports=t,t.name="recycler",t.run=function(t){t.action&&"recycling"==t.action.name||(delete t.data.targetId,delete t.data.path,this.nextAction(t)),t.action&&t.target?t.action.step(t):logError("Creep without action/activity!\nCreep: "+t.name+"\ndata: "+JSON.stringify(t.data))},t.nextAction=function(t){Creep.action.recycling.assign(t)};

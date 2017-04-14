@@ -55,9 +55,9 @@ let mod        = {
 		WALL             : false, // highlight weakest wall and display hits
 		RAMPART          : false, // highlight weakest rampart and display hits
 		ROAD             : false, // highlight weakest road and display hits
-        HEATMAP: false, // collects creep positioning to display a heatmap. WARNING: HIGH MEMORY USAGE
-        HEATMAP_INTERVAL: 2, // intervals between collections
-        ACTION_ASSIGNMENT: true, // draws a line from a creep and it's new assignment
+		HEATMAP          : false, // collects creep positioning to display a heatmap. WARNING: HIGH MEMORY USAGE
+		HEATMAP_INTERVAL : 2, // intervals between collections
+		ACTION_ASSIGNMENT: true, // draws a line from a creep and it's new assignment
 	},
 	// function parameters: room. expected result: boolean
 	SEMI_AUTOMATIC_CONSTRUCTION    : true, // enables semi-automatic construction. Will construct based on flags.
@@ -123,7 +123,7 @@ let mod        = {
 	LIMIT_URGENT_REPAIRING         : 750, // urgent repair when hits below
 	GAP_REPAIR_DECAYABLE           : 800, // decayables (e.g. roads) only get repaired when that much hits are missing
 	MEMORY_RESYNC_INTERVAL         : 500, // interval to reload spawns & towers present in a room
-	PROCESS_ORDERS_INTERVAL        : 100, // interval to process room orders and run terminalBroker
+	PROCESS_ORDERS_INTERVAL        : 500, // interval to process room orders and run terminalBroker
 	TIME_REPORT                    : 28000, // ticks between room reports
 	REPORT_MAX_LENGTH              : 500,
 	REPORTS_PER_LOOP               : 18,
@@ -161,13 +161,13 @@ let mod        = {
 		STRUCTURE_WALL,
 		STRUCTURE_RAMPART
 	],
-	CONTROLLER_SIGN                : true,
+	CONTROLLER_SIGN                : false,
 	CONTROLLER_SIGN_MESSAGE        : `Belong to CanisMinor ${String.fromCodePoint(0xD83D) + String.fromCodePoint(0xDE18)}`, // 😘
 	CONTROLLER_SIGN_UPDATE         : true, // Update sign message if user changes CONTROLLER_SIGN_MESSAGE
 	MINERS_AUTO_BUILD              : true, // miners and remoteMiners will build their own containers if they are missing.
 	MINER_WORK_THRESHOLD           : 50, // how long to wait before a miner checks for repairs/construction sites nearby again
 	REMOTE_HAULER                  : {
-		ALLOW_OVER_CAPACITY  : true, // Hauler capacity rounds up by MIN_WEIGHT, or this number value.
+		ALLOW_OVER_CAPACITY  : false, // Hauler capacity rounds up by MIN_WEIGHT, or this number value.
 		CHECK_INTERVAL       : 5, // how many ticks before we check to see if new haulers need spawninig?
 		DRIVE_BY_BUILD_ALL   : false, // If REMOTE_HAULER.DRIVE_BY_BUILDING is enabled then this option will allow remote haulers will drive-by-build any of your structures.
 		DRIVE_BY_BUILD_RANGE : 1, // A creep's max build distance is 3 but cpu can be saved by dropping the search distance to 1.

@@ -1,1 +1,0 @@
-let n=new Creep.Action("recycling");module.exports=n,n.isValidAction=(()=>!0),n.isAddableAction=(()=>!0),n.isAddableTarget=(()=>!0),n.newTarget=function(n){let e=null;return n.room.my&&n.room.structures.spawns.length>0&&(e=n.pos.findClosestByRange(n.room.structures.spawns)),null==e&&(e=Game.spawns[n.data.motherSpawn]),e},n.work=function(n){n.target.recycleCreep(n)};
