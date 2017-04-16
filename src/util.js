@@ -1,6 +1,26 @@
 // All methods require a JSDoc comment describing it.
 // http://usejsdoc.org/
 module.exports = {
+    
+    /**
+     * Gets currently visible rooms.
+     * Dependant on userscript: {@link https://github.com/Esryok/screeps-browser-ext/blob/master/visible-room-tracker.user.js Visible Room Tracker}
+     * @param {Number} [age]
+     * @returns {Array}
+     */
+    getVisibleRooms(age) {
+        const since = Game.time - (age || 5);
+        const visibleRooms = [];
+        //return _(Memory.rooms).filter(r => r.lastViewed && r.lastViewed > since).keys().value();
+        for (const roomName in Memory.rooms) {
+            const room = Memory.rooms[roomName];
+            if (room.lastViewed && room.lastViewed > since) {
+                visibleRooms.push(roomName);
+            }
+        }
+        
+        return visibleRooms;
+    },
     /**
      * formats an integer into a readable value
      * @param {Number} number
@@ -12,7 +32,7 @@ module.exports = {
         } else if (number >= 1000) {
             return (number / 1000).toFixed(1) + 'K';
         }
-        return number.toString();
+        return _.isUndefined(number) ? number : number.toString();
     },
     
     /**
@@ -40,7 +60,7 @@ module.exports = {
      */
     get(object, path, defaultValue, setDefault = true) {
         const r = _.get(object, path);
-        if (!r && !_.isUndefined(defaultValue) && setDefault) {
+        if (_.isUndefined(r) && !_.isUndefined(defaultValue) && setDefault) {
             defaultValue = Util.fieldOrFunction(defaultValue);
             _.set(object, path, defaultValue);
             return _.get(object, path);
@@ -525,7 +545,7 @@ module.exports = {
                     Util.logSystem('Average Usage', `<table style="font-size:80%;"><tr><th>Type${Array(longestType.length + 2).join(' ')}</th><th>(avg/creep/tick)</th><th>(active)</th><th>(weighted avg)</th><th>(executions)</th></tr>`.concat(string));
                 }
                 Util.logSystem(name, ' loop:' + _.round(totalUsed, 2), 'other:' + _.round(onLoad, 2), 'avg:' + _.round(avgCPU, 2), 'ticks:' + global.profiler.totalTicks, 'bucket:' + Game.cpu.bucket);
-                if (PROFILE) console.log('\n');
+                if (PROFILE && !PROFILING.BASIC_ONLY) console.log('\n');
                 Memory.profiler = global.profiler;
             };
         }
