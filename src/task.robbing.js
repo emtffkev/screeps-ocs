@@ -22,8 +22,8 @@ mod.checkForRequiredCreeps = (flag) => {
     // count creeps assigned to task
     const count = memory.queued.length + memory.spawning.length + memory.running.length;
     const roomName = flag.pos.roomName;
-    
-    // if creep count below requirement spawn a new creep creep 
+
+    // if creep count below requirement spawn a new creep creep
     if( count < (memory.numRobbers || 2) ) {
         const spawnRoom = mod.strategies.robber.spawnRoom({roomName});
         if( !spawnRoom ) {
@@ -37,7 +37,7 @@ mod.checkForRequiredCreeps = (flag) => {
                 task: mod.name, // taskName
                 targetName: flag.name, // targetName
                 homeRoom: storageRoom.name
-            }, 
+            },
             { // spawn room selection params
                 targetRoom: roomName,
                 explicit: spawnRoom.name,
@@ -109,11 +109,11 @@ mod.handleCreepDied = name => {
 };
 // get task memory
 mod.memory = (flag) => {
-    if( !flag.memory.tasks ) 
+    if( !flag.memory.tasks )
         flag.memory.tasks = {};
     if( !flag.memory.tasks.robbing ) {
         flag.memory.tasks.robbing = {
-            queued: [], 
+            queued: [],
             spawning: [],
             running: [],
             numRobbers: 2
@@ -254,9 +254,9 @@ mod.gotoTargetRoom = (creep, flag) => {
 mod.creep = {
     robbing: {
         fixedBody: [WORK, CARRY, MOVE, MOVE],
-        multiBody: [CARRY, MOVE],
-        name: "robber", 
-        behaviour: "privateer", 
+        multiBody: [CARRY,CARRY, MOVE],
+        name: "robber",
+        behaviour: "privateer",
         queue: 'Low'
     },
 };
