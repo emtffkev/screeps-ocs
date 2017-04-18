@@ -253,7 +253,7 @@ mod.gotoTargetRoom = (creep, flag) => {
 };
 mod.creep = {
     robbing: {
-        fixedBody: [WORK, CARRY, MOVE, MOVE],
+        fixedBody: [WORK, CARRY, MOVE],
         multiBody: [CARRY,CARRY, MOVE],
         name: "robber",
         behaviour: "privateer",
