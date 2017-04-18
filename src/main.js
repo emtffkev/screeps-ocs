@@ -1,4 +1,4 @@
-/* https://github.com/ScreepsOCS/screeps.behaviour-action-pattern */
+console.log('# Coding update')
 const cpuAtLoad = Game.cpu.getUsed();
 
 // check if a path is valid
