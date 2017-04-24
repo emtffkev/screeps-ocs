@@ -1,0 +1,1 @@
+const n={};module.exports=n,n.analyzeRoom=function(n,t){t&&n.saveExtensions()},n.extend=function(){Room.prototype.saveExtensions=function(){const n=this.find(FIND_MY_STRUCTURES,{filter:n=>n instanceof StructureExtension}).map(n=>n.id);n.length>0?this.memory.extensions=n:delete this.memory.extensions}};
