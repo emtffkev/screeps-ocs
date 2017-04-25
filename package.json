@@ -6,7 +6,8 @@
 	"author"      : "canisminor1990 <canisminor1990@gmail.com>",
 	"license"     : "MIT",
 	"scripts"     : {
-		"build": "gulp && git add -A && git commit -m 'update' && git push"
+		"build": "gulp && git add -A && git commit -m 'update' && git push",
+		"pull": "git pull; cd lib; git pull"
 	},
 	"dependencies": {
 		"ScreepsAutocomplete": "https://github.com/Garethp/ScreepsAutocomplete.git",
