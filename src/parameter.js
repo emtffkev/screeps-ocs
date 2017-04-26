@@ -32,23 +32,23 @@ let mod        = {
 	GRAFANA                        : true, // track for Grafana data
 	GRAFANA_INTERVAL               : 3, // loops between Grafana tracking - No lower than 3.
 	CENSUS_ANNOUNCEMENTS           : true, // log birth and death
-	SELL_NOTIFICATION              : true, // send mail when selling minerals
+	SELL_NOTIFICATION              : false, // send mail when selling minerals
 	SPAWN_INTERVAL                 : 5, // loops between regular spawn probe
 	ROOM_VISUALS                   : true, // display basic room statistics with RoomVisuals
 	ROOM_VISUALS_ALL               : false, // displays visuals in all rooms you have vision in. Only your rooms when false.
 	VISUALS                        : { // if ROOM_VISUALS is enabled, you can select what you want to display - All is a bit much for some people.
 		VISIBLE_ONLY: false, // depends on userscript: https://github.com/Esryok/screeps-browser-ext/blob/master/visible-room-tracker.user.js
-		ROOM             : true, // displays basic info relative to the room
-		ROOM_GLOBAL      : true, // displays basic info relative to your account - requires ROOM: true
+		ROOM             : false, // displays basic info relative to the room
+		ROOM_GLOBAL      : false, // displays basic info relative to your account - requires ROOM: true
 		INFO_PIE_CHART: false, // replaces the info bars with pie charts
-		CPU              : true, // display a graph containing CPU used, CPU limit, and bucket
+		CPU              : false, // display a graph containing CPU used, CPU limit, and bucket
 		ROOM_ORDERS      : true, // display orders the room creates
 		ROOM_OFFERS      : true, // display what a room will offer another
 		SPAWN            : true, // displays creep name and spawn progress percentage when spawning
 		CONTROLLER       : true, // displays level, progress, and ticks to downgrade if active
 		STORAGE          : true, // displays storage contents
 		TERMINAL         : true, // displays terminal contents
-		TOWER            : true, // displays tower contents
+		TOWER            : false, // displays tower contents
 		TRANSACTIONS     : true, // displays 2 most recent transactions over room terminal
 		LABS             : true, // displays lab energy, mineral, or cooldown
 		MINERAL          : true, // displays mineral amount, or ticks to regen
@@ -163,7 +163,7 @@ let mod        = {
 		STRUCTURE_WALL,
 		STRUCTURE_RAMPART
 	],
-	CONTROLLER_SIGN                : false,
+	CONTROLLER_SIGN                : true,
 	CONTROLLER_SIGN_MESSAGE        : `Belong to CanisMinor ${String.fromCodePoint(0xD83D) + String.fromCodePoint(0xDE18)}`, // 😘
 	CONTROLLER_SIGN_UPDATE         : true, // Update sign message if user changes CONTROLLER_SIGN_MESSAGE
 	MINERS_AUTO_BUILD              : true, // miners and remoteMiners will build their own containers if they are missing.
