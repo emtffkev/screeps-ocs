@@ -176,7 +176,7 @@ let mod        = {
 		DRIVE_BY_REPAIR_RANGE: 0, // range that remote haulers should search when trying to repair and move
 		MIN_LOAD: 0.75, // Haulers will return home as long as their ratio of carrying/capacity is above this amount.
 		MIN_WEIGHT: 800, // Small haulers are a CPU drain.
-		MULTIPLIER: 1, // Max number of haulers spawned per source in a remote mining room.
+		MULTIPLIER: 2, // Max number of haulers spawned per source in a remote mining room.
 		REHOME: false, // May haulers choose closer storage for delivery?
 	},
 	TASK_CREEP_CHECK_INTERVAL: 250, // Maximum number of ticks before a task checks to see if it needs to spawn new creeps
