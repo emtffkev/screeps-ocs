@@ -189,7 +189,8 @@ let mod        = {
 		'canisminor1990',
 		'Ruo',
 		'FanHua',
-		'kikooo'
+		'kikooo',
+		'shinra'
 	],
 	// Don't attack. Must be a member of OCS for permanent whitelisting in git repository. But you can change your own copy... Please ask if you are interested in joining OCS :)
 	DEFENSE_BLACKLIST              : [], // Don't defend those rooms (add room names). Blocks spawning via defense task (will not prevent offensive actions at all)
