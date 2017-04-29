@@ -95,11 +95,11 @@ let mod = {
     MIN_SELL_RATIO: {
         'H': 0.02,
         'O': 0.02,
-        'U': 0.2,
-        'L': 0.2,
-        'K': 0.2,
-        'Z': 0.2,
-        'X': 0.2
+        'U': 0.15,
+        'L': 0.15,
+        'K': 0.15,
+        'Z': 0.15,
+        'X': 0.3
     },
     MAX_REPAIR_LIMIT: { // Limits how high structures get repaired by towers, regarding RCL
         1: 1000,
