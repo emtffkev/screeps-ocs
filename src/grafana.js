@@ -1,65 +1,116 @@
 let mod = {};
 
-mod.run = function () {
-	let stats = {
-		// time
-		'time'             : Game.time,
-		// gcl
-		'gcl.progress'     : Game.gcl.progress,
-		'gcl.progressTotal': Game.gcl.progressTotal,
-		'gcl.level'        : Game.gcl.level,
-		// cpu
-		'cpu.bucket'       : Game.cpu.bucket,
-		'cpu.limit'        : Game.cpu.limit,
-		'cpu.getUsed'      : Game.cpu.getUsed(),
-		// market
-		'market.credits'   : Game.market.credits,
-		// creeps
-		'creeps'           : _.size(Game.creeps)
-	};
-
-	// ROOMS
-	for (let roomName in Game.rooms) {
-		const room = Game.rooms[roomName];
-		if (!room) continue;
-		if (!room.my) continue;
-		// room
-		stats[`room.${roomName}.myRoom`]                  = 1;
-		// energy
-		stats[`room.${roomName}.energyAvailable`]         = room.energyAvailable;
-		stats[`room.${roomName}.energyCapacityAvailable`] = room.energyCapacityAvailable;
-		// rcl
-		const controller                                  = room.controller;
-		stats[`room.${roomName}.rcl`]                     = controller.level;
-		stats[`room.${roomName}.controllerProgress`]      = controller.progress;
-		stats[`room.${roomName}.controllerProgressTotal`] = controller.progressTotal;
-		// storage
-		const storage                                     = room.storage;
-		try {
-			stats[`room.${roomName}.storedEnergy`]  = storage.store[RESOURCE_ENERGY];
-			stats[`room.${roomName}.storedMineral`] = _.sum(storage.store) - storage.store[RESOURCE_ENERGY];
-		} catch (e) {
-			stats[`room.${roomName}.storedEnergy`]  = 0;
-			stats[`room.${roomName}.storedMineral`] = 0;
-		}
-		// terminals
-		const terminal = room.terminal;
-		try {
-			stats[`room.${roomName}.terminalEnergy`]  = terminal.store[RESOURCE_ENERGY];
-			stats[`room.${roomName}.terminalMineral`] = _.sum(terminal.store) - terminal.store[RESOURCE_ENERGY];
-		} catch (e) {
-			stats[`room.${roomName}.terminalEnergy`]  = 0;
-			stats[`room.${roomName}.terminalMineral`] = 0;
-		}
-	}
-
-	// _.forEach(Memory.population, (creep = {}) => {
-	// 	const roomName = creep.homeRoom,
-	// 	      role     = creep.creepType;
-	// 	(!stats[`room.${roomName}.roles.${role}`]) ? stats[`room.${roomName}.roles.${role}`] = 1 : stats[`room.${roomName}.roles.${role}`]++;
-	// });
-
-	Memory.stats = stats;
+mod.run = function() {
+    
+    Memory.stats = { tick: Game.time };
+    
+    Memory.stats.cpu = Game.cpu;
+    Memory.stats.cpu.used = Game.cpu.getUsed();
+    Memory.stats.gcl = Game.gcl;
+    
+    Memory.stats.market = {
+        credits: Game.market.credits,
+        numOrders: Game.market.orders ? Object.keys(Game.market.orders).length : 0,
+    };
+    
+    // ROOMS
+    Memory.stats.rooms = {};
+    
+    for (let roomName in Game.rooms) {
+        const room = Game.rooms[roomName];
+        if (!room) continue;
+        if (!room.my) continue;
+        Memory.stats.rooms[room.name] = {
+            name: room.name,
+            spawns: {},
+            storage: {},
+            terminal: {},
+            minerals: {},
+            sources: {},
+        };
+        
+        mod.init(room, Memory.stats.rooms[room.name]);
+    }
+    
 };
+
+mod.init = function(room, object) {
+    mod.controller(room, object);
+    mod.energy(room, object);
+    mod.spawns(room, object.spawns);
+    mod.storage(room, object.storage);
+    mod.terminal(room, object.terminal);
+    mod.minerals(room, object.minerals);
+    mod.sources(room, object.sources);
+};
+
+mod.controller = function(room, object) {
+    if (room.controller) {
+        object.controller = {
+            level: room.controller.level,
+            progress: room.controller.progress,
+            progressTotal: room.controller.progressTotal,
+        };
+    }
+};
+
+mod.energy = function(room, object) {
+    object.energy = {
+        available: room.energyAvailable,
+        capacityAvailable: room.energyCapacityAvailable,
+    }
+};
+
+mod.spawns = function(room, object) {
+    if (room.structures.spawns) {
+        room.structures.spawns.forEach(spawn => {
+            object[spawn.name] = {
+                name: spawn.name,
+                spawning: spawn.spawning !== null ? 1 : 0,
+            };
+        });
+    }
+};
+
+mod.storage = function(room, object) {
+    if (room.storage) {
+        object.store = _.sum(room.storage.store);
+        object.resources = {};
+        Object.keys(room.storage.store).forEach(resource => object.resources[resource] = room.storage.store[resource]);
+    }
+};
+
+mod.terminal = function(room, object) {
+    if (room.terminal) {
+        object.store = _.sum(room.terminal.store);
+        object.resources = {};
+        Object.keys(room.terminal.store).forEach(resource => object.resources[resource] = room.terminal.store[resource]);
+    }
+};
+
+mod.minerals = function(room, object) {
+    if (room.minerals) {
+        room.minerals.forEach(mineral => object[mineral.id] = {
+            id: mineral.id,
+            density: mineral.density,
+            mineralAmount: mineral.mineralAmount,
+            mineralType: mineral.mineralType,
+            ticksToRegeneration: mineral.ticksToRegeneration,
+        });
+    }
+};
+
+mod.sources = function(room, object) {
+    if (room.sources) {
+        room.sources.forEach(source => object[source.id] = {
+            id: source.id,
+            energy: source.energy,
+            energyCapacity: source.energyCapacity,
+            ticksToRegeneration: source.ticksToRegeneration,
+        });
+    }
+};
+
+
 
 module.exports = mod;
