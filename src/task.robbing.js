@@ -4,10 +4,14 @@ module.exports = mod;
 mod.name = 'robbing';
 // hook into events
 mod.register = () => {};
+mod.checkFlag = (flag) => {
+    // robbing own rooms is handled by Task.delivery
+    return !(flag.room && flag.room.my) && flag.compareTo(FLAG_COLOR.invade.robbing) && Task.nextCreepCheck(flag, mod.name);
+};
 // for each flag
 mod.handleFlagFound = flag => {
     // if it is a robbing flag
-    if (flag.compareTo(FLAG_COLOR.invade.robbing) && Task.nextCreepCheck(flag, mod.name)) {
+    if (Task.robbing.checkFlag(flag)) {
         Util.set(flag.memory, 'task', mod.name);
         // check if a new creep has to be spawned
         Task.robbing.checkForRequiredCreeps(flag);
@@ -22,8 +26,8 @@ mod.checkForRequiredCreeps = (flag) => {
     // count creeps assigned to task
     const count = memory.queued.length + memory.spawning.length + memory.running.length;
     const roomName = flag.pos.roomName;
-
-    // if creep count below requirement spawn a new creep creep
+    
+    // if creep count below requirement spawn a new creep creep 
     if( count < (memory.numRobbers || 2) ) {
         const spawnRoom = mod.strategies.robber.spawnRoom({roomName});
         if( !spawnRoom ) {
@@ -109,11 +113,11 @@ mod.handleCreepDied = name => {
 };
 // get task memory
 mod.memory = (flag) => {
-    if( !flag.memory.tasks )
+    if( !flag.memory.tasks ) 
         flag.memory.tasks = {};
     if( !flag.memory.tasks.robbing ) {
         flag.memory.tasks.robbing = {
-            queued: [],
+            queued: [], 
             spawning: [],
             running: [],
             numRobbers: 2
@@ -253,10 +257,10 @@ mod.gotoTargetRoom = (creep, flag) => {
 };
 mod.creep = {
     robbing: {
-        fixedBody: [WORK, CARRY, MOVE],
-        multiBody: [CARRY,CARRY, MOVE],
-        name: "robber",
-        behaviour: "privateer",
+        fixedBody: [WORK, CARRY, MOVE, MOVE],
+        multiBody: [CARRY, MOVE],
+        name: "robber", 
+        behaviour: "privateer", 
         queue: 'Low'
     },
 };
