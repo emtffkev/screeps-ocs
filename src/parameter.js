@@ -161,7 +161,7 @@ let mod = {
         DRIVE_BY_REPAIR_RANGE: 0, // range that remote haulers should search when trying to repair and move
         MIN_LOAD: 0.75, // Haulers will return home as long as their ratio of carrying/capacity is above this amount.
         MIN_WEIGHT: 800, // Small haulers are a CPU drain.
-        MULTIPLIER: 4, // Max number of haulers spawned per source in a remote mining room.
+        MULTIPLIER: 2, // Max number of haulers spawned per source in a remote mining room.
         REHOME: true, // May haulers choose closer storage for delivery?
     },
     TASK_CREEP_CHECK_INTERVAL: 250, // Maximum number of ticks before a task checks to see if it needs to spawn new creeps
@@ -175,7 +175,7 @@ let mod = {
     CRITICAL_BUCKET_LEVEL: 1000, // take action when the bucket drops below this value to prevent the bucket from actually running out
     CRITICAL_BUCKET_OVERFILL: 200, // Overfill the bucket by this amount before disabling CPU throttle, this can reduce thrashing because all creeps try to act at once
     CRITICAL_ROLES: [ 'worker', 'collapseWorker', 'melee', 'ranger', 'healer', 'miner', 'hauler', 'upgrader' ], // when the bucket drops below the critical bucket level only these creep roles will be executed
-    ROBBER_REHOME: false, // May robbers choose closer storage for delivery?
+    ROBBER_REHOME: true, // May robbers choose closer storage for delivery?
     OBSERVER_OBSERVE_RANGE: 3, // the range for observers to look at
     OBSERVER_OBSERVE_HIGHWAYS_ONLY: true, // the observers will only look at highways - changing this will require you to clear cached rooms
     ACTION_SAY: { // what gets said on creep.action.*.onAssignment
