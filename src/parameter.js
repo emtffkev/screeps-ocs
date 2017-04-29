@@ -130,7 +130,7 @@ let mod = {
     REPORT_MAX_LENGTH: 500,
     REPORTS_PER_LOOP: 18,
     SEND_STATISTIC_REPORTS: true, // Set to true to receive room statistics per mail, otherwise set to false.
-    ROAD_CONSTRUCTION_ENABLE: false, // Set to False to disable automatic road construction, or to a number to enable for owned rooms reaching that RC Level. WARNING: HIGH MEMORY USAGE
+    ROAD_CONSTRUCTION_ENABLE: true, // Set to False to disable automatic road construction, or to a number to enable for owned rooms reaching that RC Level. WARNING: HIGH MEMORY USAGE
     ROAD_CONSTRUCTION_INTERVAL: 500,
     ROAD_CONSTRUCTION_MIN_DEVIATION: 1.2,
     ROAD_CONSTRUCTION_ABS_MIN: 3,
@@ -151,7 +151,7 @@ let mod = {
     // function parameters: room. expected result: string
     CONTROLLER_SIGN_MESSAGE: `Belong to ${_ME} :)`,
     CONTROLLER_SIGN_UPDATE: false, // Update sign message if user changes CONTROLLER_SIGN_MESSAGE
-    MINERS_AUTO_BUILD: false, // miners and remoteMiners will build their own containers if they are missing.
+    MINERS_AUTO_BUILD: true, // miners and remoteMiners will build their own containers if they are missing.
     MINER_WORK_THRESHOLD: 50, // how long to wait before a miner checks for repairs/construction sites nearby again
     REMOTE_HAULER: {
         ALLOW_OVER_CAPACITY: 2450, // Hauler capacity rounds up by MIN_WEIGHT, or this number value.
