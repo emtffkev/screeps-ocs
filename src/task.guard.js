@@ -16,15 +16,15 @@ mod.handleFlagFound = flag => {
 };
 mod.creep = {
     guard: {
-        fixedBody: [ATTACK, MOVE],
+        fixedBody: [RANGED_ATTACK, MOVE],
         multiBody: {
             [HEAL]: 1,
             [MOVE]: 2,
-            [ATTACK]: 2,
+            [RANGED_ATTACK]: 2,
             [TOUGH]: 1,
         },
         name: "guard", 
-        behaviour: "melee",
+        behaviour: "ranger", 
         queue: 'Low'
     },
 };
