@@ -60,6 +60,7 @@ mod.extend = function(){
         if( !this.spawning ){
             if(!behaviour && this.data && this.data.creepType) {
                 behaviour = Creep.behaviour[this.data.creepType];
+                if (this.room.skip) return;
                 if ( Memory.CPU_CRITICAL && !CRITICAL_ROLES.includes(this.data.creepType) ) {
                     return;
                 }
@@ -199,11 +200,11 @@ mod.extend = function(){
     Creep.prototype.idleMove = function( ) {
         if( this.fatigue > 0 ) return;
         // check if on road/structure
-        const needToMove = _.find(this.room.structures.piles, {'pos': this.pos}) ||
-                   this.room.lookForAt(LOOK_STRUCTURES, this.pos) ||
-                   this.room.lookForAt(LOOK_CONSTRUCTION_SITES, this.pos, {filter: s => s.my}) ||
-                   this.pos.findInRange(this.room.hostiles, 3);
-        if (needToMove) {
+        let here = _.chain(this.room.structures.piles).filter('pos', this.pos)
+            .concat(this.room.lookForAt(LOOK_STRUCTURES, this.pos))
+            .concat(this.room.lookForAt(LOOK_CONSTRUCTION_SITES, this.pos, {filter: s => s.my}))
+            .value();
+        if( here && here.length > 0 ) {
             let path;
             if( !this.data.idlePath || this.data.idlePath.length < 2 || this.data.idlePath[0].x != this.pos.x || this.data.idlePath[0].y != this.pos.y || this.data.idlePath[0].roomName != this.pos.roomName ) {
                 let goals = this.room.structures.all.map(function(o) {
@@ -214,8 +215,6 @@ mod.extend = function(){
                     return { pos: e, range: 1 };
                 })).concat(this.room.myConstructionSites.map(function(o) {
                     return { pos: o.pos, range: 1};
-                })).concat(this.pos.findInRange(this.room.hostiles, 3).map(function (h) {
-                    return { pos: h.pos, range: 1};
                 }));
 
                 let ret = PathFinder.search(
@@ -374,9 +373,6 @@ mod.extend = function(){
 
     // Explain API extension
     Creep.prototype.explainAgent = function() {
-        if (this.action) {
-            this.action.showAssignment(this, this.target);
-        }
         return `ttl:${this.ticksToLive} pos:${this.pos}`;
     };
 
