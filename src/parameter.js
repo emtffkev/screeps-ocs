@@ -88,7 +88,7 @@ let mod = {
     MAX_STORAGE_MINERAL:0, // keep a max of each type of minerals in store
     ROOM_TRADING: true, // set this true to enable haulers within your colony to request resources from other rooms in your colony
     FILL_POWERSPAWN: true,
-    MIN_MINERAL_SELL_AMOUNT: 5000,
+    MIN_MINERAL_SELL_AMOUNT: 10000,
     ENERGY_VALUE_CREDITS: 0.015, // assumed energy exchange rate (in credits) to determine best mineral sell offer
     //MAX_SELL_RANGE: 60,
     TERMINAL_ENERGY: 100000,
@@ -124,8 +124,8 @@ let mod = {
     MAX_FORTIFY_CONTAINER: 50000,
     LIMIT_URGENT_REPAIRING: 750, // urgent repair when hits below
     GAP_REPAIR_DECAYABLE: 800, // decayables (e.g. roads) only get repaired when that much hits are missing
-    MEMORY_RESYNC_INTERVAL: 500, // interval to reload spawns & towers present in a room
-    PROCESS_ORDERS_INTERVAL: 10, // interval to process room orders and run terminalBroker
+    MEMORY_RESYNC_INTERVAL: 1000, // interval to reload spawns & towers present in a room
+    PROCESS_ORDERS_INTERVAL: 30, // interval to process room orders and run terminalBroker
     TIME_REPORT: 28000, // ticks between room reports
     REPORT_MAX_LENGTH: 500,
     REPORTS_PER_LOOP: 18,
