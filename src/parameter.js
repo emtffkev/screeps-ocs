@@ -89,12 +89,12 @@ let mod = {
     ROOM_TRADING: true, // set this true to enable haulers within your colony to request resources from other rooms in your colony
     FILL_POWERSPAWN: true,
     MIN_MINERAL_SELL_AMOUNT: 5000,
-    ENERGY_VALUE_CREDITS: 0.02, // assumed energy exchange rate (in credits) to determine best mineral sell offer
+    ENERGY_VALUE_CREDITS: 0.015, // assumed energy exchange rate (in credits) to determine best mineral sell offer
     //MAX_SELL_RANGE: 60,
     TERMINAL_ENERGY: 100000,
     MIN_SELL_RATIO: {
-        'H': 0.02,
-        'O': 0.02,
+        'H': 0.015,
+        'O': 0.015,
         'U': 0.12,
         'L': 0.12,
         'K': 0.12,
