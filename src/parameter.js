@@ -14,6 +14,7 @@ let mod = {
         ANALYZE_LIMIT: 2, // profile warning levels
         AVERAGE_USAGE: false, // display average creep & flag usage
         BASIC_ONLY: true, // only display basic profiling information, disables all other profiling
+        BEHAVIOUR: false, // profile behaviour action assignment
         CREEPS: false, // display creep profiling information
         CREEP_TYPE: '', // define a specific creep to profile, requires CREEPS=true
         EXECUTE_LIMIT: 5, // profile warning levels
@@ -85,21 +86,21 @@ let mod = {
         7: 25000,
         8: 50000
     },
-    MAX_STORAGE_MINERAL:0, // keep a max of each type of minerals in store
+    MAX_STORAGE_MINERAL:200000, // keep a max of each type of minerals in store
     ROOM_TRADING: true, // set this true to enable haulers within your colony to request resources from other rooms in your colony
     FILL_POWERSPAWN: true,
-    MIN_MINERAL_SELL_AMOUNT: 10000,
-    ENERGY_VALUE_CREDITS: 0.015, // assumed energy exchange rate (in credits) to determine best mineral sell offer
+    MIN_MINERAL_SELL_AMOUNT: 20000,
+    ENERGY_VALUE_CREDITS: 0.05, // assumed energy exchange rate (in credits) to determine best mineral sell offer
     //MAX_SELL_RANGE: 60,
     TERMINAL_ENERGY: 100000,
     MIN_SELL_RATIO: {
-        'H': 0.015,
-        'O': 0.015,
-        'U': 0.12,
-        'L': 0.12,
-        'K': 0.12,
-        'Z': 0.12,
-        'X': 0.3
+        'H': 0.02,
+        'O': 0.02,
+        'U': 0.2,
+        'L': 0.2,
+        'K': 0.2,
+        'Z': 0.2,
+        'X': 0.2
     },
     MAX_REPAIR_LIMIT: { // Limits how high structures get repaired by towers, regarding RCL
         1: 1000,
@@ -124,13 +125,13 @@ let mod = {
     MAX_FORTIFY_CONTAINER: 50000,
     LIMIT_URGENT_REPAIRING: 750, // urgent repair when hits below
     GAP_REPAIR_DECAYABLE: 800, // decayables (e.g. roads) only get repaired when that much hits are missing
-    MEMORY_RESYNC_INTERVAL: 1000, // interval to reload spawns & towers present in a room
-    PROCESS_ORDERS_INTERVAL: 30, // interval to process room orders and run terminalBroker
+    MEMORY_RESYNC_INTERVAL: 500, // interval to reload spawns & towers present in a room
+    PROCESS_ORDERS_INTERVAL: 500, // interval to process room orders and run terminalBroker
     TIME_REPORT: 28000, // ticks between room reports
     REPORT_MAX_LENGTH: 500,
     REPORTS_PER_LOOP: 18,
-    SEND_STATISTIC_REPORTS: false, // Set to true to receive room statistics per mail, otherwise set to false.
-    ROAD_CONSTRUCTION_ENABLE: false, // Set to False to disable automatic road construction, or to a number to enable for owned rooms reaching that RC Level. WARNING: HIGH MEMORY USAGE
+    SEND_STATISTIC_REPORTS: true, // Set to true to receive room statistics per mail, otherwise set to false.
+    ROAD_CONSTRUCTION_ENABLE: true, // Set to False to disable automatic road construction, or to a number to enable for owned rooms reaching that RC Level. WARNING: HIGH MEMORY USAGE
     ROAD_CONSTRUCTION_INTERVAL: 500,
     ROAD_CONSTRUCTION_MIN_DEVIATION: 1.2,
     ROAD_CONSTRUCTION_ABS_MIN: 3,
@@ -147,9 +148,9 @@ let mod = {
     COST_MATRIX_VALIDITY: 1000,
     // function parameters: room. expected result: array
     CONSTRUCTION_PRIORITY: [STRUCTURE_SPAWN,STRUCTURE_EXTENSION,STRUCTURE_LINK,STRUCTURE_TERMINAL,STRUCTURE_STORAGE,STRUCTURE_TOWER,STRUCTURE_POWER_SPAWN,STRUCTURE_NUKER,STRUCTURE_OBSERVER,STRUCTURE_ROAD,STRUCTURE_CONTAINER,STRUCTURE_EXTRACTOR,STRUCTURE_LAB,STRUCTURE_WALL,STRUCTURE_RAMPART],
-    CONTROLLER_SIGN: true,
+    CONTROLLER_SIGN: false,
     // function parameters: room. expected result: string
-    CONTROLLER_SIGN_MESSAGE: `Belong to ${_ME} :)`,
+    CONTROLLER_SIGN_MESSAGE: `Territory of ${_ME}, an Open Collaboration Society user! (https://github.com/ScreepsOCS)`,
     CONTROLLER_SIGN_UPDATE: false, // Update sign message if user changes CONTROLLER_SIGN_MESSAGE
     MINERS_AUTO_BUILD: true, // miners and remoteMiners will build their own containers if they are missing.
     MINER_WORK_THRESHOLD: 50, // how long to wait before a miner checks for repairs/construction sites nearby again
@@ -161,7 +162,7 @@ let mod = {
         DRIVE_BY_REPAIR_RANGE: 0, // range that remote haulers should search when trying to repair and move
         MIN_LOAD: 0.75, // Haulers will return home as long as their ratio of carrying/capacity is above this amount.
         MIN_WEIGHT: 800, // Small haulers are a CPU drain.
-        MULTIPLIER: 2, // Max number of haulers spawned per source in a remote mining room.
+        MULTIPLIER: 4, // Max number of haulers spawned per source in a remote mining room.
         REHOME: true, // May haulers choose closer storage for delivery?
     },
     TASK_CREEP_CHECK_INTERVAL: 250, // Maximum number of ticks before a task checks to see if it needs to spawn new creeps
@@ -175,9 +176,10 @@ let mod = {
     CRITICAL_BUCKET_LEVEL: 1000, // take action when the bucket drops below this value to prevent the bucket from actually running out
     CRITICAL_BUCKET_OVERFILL: 200, // Overfill the bucket by this amount before disabling CPU throttle, this can reduce thrashing because all creeps try to act at once
     CRITICAL_ROLES: [ 'worker', 'collapseWorker', 'melee', 'ranger', 'healer', 'miner', 'hauler', 'upgrader' ], // when the bucket drops below the critical bucket level only these creep roles will be executed
-    ROBBER_REHOME: true, // May robbers choose closer storage for delivery?
+    ROBBER_REHOME: false, // May robbers choose closer storage for delivery?
     OBSERVER_OBSERVE_RANGE: 3, // the range for observers to look at
     OBSERVER_OBSERVE_HIGHWAYS_ONLY: true, // the observers will only look at highways - changing this will require you to clear cached rooms
+    COMPRESS_COST_MATRICES: false, // enable to compress cached cost matrices (1/5 the size, but currently about 2x CPU usage)
     ACTION_SAY: { // what gets said on creep.action.*.onAssignment
         ATTACK_CONTROLLER: String.fromCodePoint(0x1F5E1) + String.fromCodePoint(0x26F3), // 🗡⛳
         AVOIDING: String.fromCodePoint(0x21A9), // ↩
@@ -197,6 +199,7 @@ let mod = {
         HEALING: String.fromCodePoint(0x26E8), // ⛨
         IDLE: String.fromCodePoint(0x1F3B5), // 🎵
         INVADING: String.fromCodePoint(0x1F52B), // 🔫
+        MINING: String.fromCodePoint(0x26CF), // ⛏
         PICKING: String.fromCodePoint(0x23EC), // ⏬
         REALLOCATING: String.fromCodePoint(0x2194), // ↔
         RECYCLING: String.fromCodePoint(0x267B), // ♻
